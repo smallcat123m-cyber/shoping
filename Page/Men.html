@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Men Shop</title>
+    <link rel="stylesheet" href="../src/output.css">
+</head>
+
+<body class="bg-gray-100">
+
+<!-- 🔥 NAVBAR (FULL STICKY) -->
+<nav class="sticky top-0 z-50 bg-white shadow-md flex justify-between items-center px-4 py-3">
+
+    <div class="flex items-center gap-2">
+        <img class="w-10 h-10 rounded-full" src="../Logo/cat.jpg" alt="logo">
+        <h1 class="font-bold text-xl md:text-2xl">
+            <a href="Colthes.html">CL SHOP</a>
+        </h1>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="flex w-full max-w-md shadow-md rounded-xl overflow-hidden mx-4">
+
+        <input 
+            id="searchInput"
+            type="text"
+            placeholder="Search men products..."
+            class="w-full px-4 py-2 outline-none"
+        >
+
+        <button 
+            onclick="searchProduct()"
+            class="bg-green-500 text-white px-5 hover:bg-green-600 transition">
+            Search
+        </button>
+
+    </div>
+
+    <!-- MENU -->
+    <ul class="hidden md:flex gap-6 text-lg font-semibold">
+        <li><a href="Men.html">Men</a></li>
+        <li><a href="Women.html">Women</a></li>
+        <li><a href="Couple.html">Couple</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+        <li><a href="About.html">About</a></li>
+        <li><a href="Login.html">Login</a></li>
+    </ul>
+
+</nav>
+
+<!-- 🔥 HEADER (NOT STICKY - CLEAN UI) -->
+<div class="text-center py-6">
+    <h1 class="text-3xl font-bold text-gray-800">Men Products</h1>
+    <p class="text-blue-500 text-sm">Discover latest men fashion collection</p>
+</div>
+
+<!-- 🔥 PRODUCTS -->
+<div id="men-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6"></div>
+
+<!-- JS -->
+<script src="../Data/Mendata.js"></script>
+<script src="../Data/Maindata.js"></script>
+
+<script>
+renderMenProducts();
+
+// CORE SEARCH FUNCTION
+function handleSearch(value) {
+    value = value.toLowerCase();
+
+    if (value === "") {
+        renderMenProducts(MenData);
+        return;
+    }
+
+    let filtered = MenData.filter(item =>
+        item.description.toLowerCase().includes(value) ||
+        String(item.price).includes(value)
+    );
+
+    renderMenProducts(filtered);
+}
+
+// BUTTON SEARCH
+function searchProduct() {
+    let value = document.getElementById("searchInput").value;
+    handleSearch(value);
+}
+
+// LIVE SEARCH
+document.getElementById("searchInput").addEventListener("input", function () {
+    handleSearch(this.value);
+});
+</script>
+
+</body>
+</html>
